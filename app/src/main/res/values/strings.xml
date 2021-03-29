@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Books App</string>
+    <string name="main_book_title">Title</string>
+    <string name="man_book_author">Author</string>
+    <string name="main_book_add_book">Add Book</string>
+    <string name="book_list_item_title">Title</string>
+    <string name="book_list_item_author">Author</string>
 </resources>
