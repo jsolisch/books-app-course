@@ -5,15 +5,20 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 01 Step 02: Improved: How to not do it with DataBindings!
+## Module 01 Step 03: UI and logic separation through a ViewModel 
 What did we improve?
-- We added a basic structure.
-- We implemented basic data bindings.
-- We removed findById boilerplate code.
+- We added a ViewModel
+- We separated UI code from logic code
+- We now respect the android life cycle 
 
-## DataBindings documentation
+## ModelView documentation
+[Model View](https://developer.android.com/topic/libraries/architecture/viewmodel)
+[Life Data](https://developer.android.com/topic/libraries/architecture/livedata)
 [Data Bindings](https://developer.android.com/topic/libraries/data-binding)
 
+## Import to note
+**Never use UI view in your ViewModel! Since the goal is to separate UI code and logic code!**
+**It is also highly likely that you will leak memory!!!** 
+
 ## Problems with our implementation
-- Every thing is in the MainActivity UI code and logic is mixed.
-- The android lifecycle is not respected. If we turn the device all data is gone.
+- Our data dose not persist after application restarts.
