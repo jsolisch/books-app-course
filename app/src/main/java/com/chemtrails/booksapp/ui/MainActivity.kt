@@ -1,15 +1,15 @@
 package com.chemtrails.booksapp.ui
 
 import android.os.Bundle
-import android.widget.*
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.chemtrails.booksapp.R
-import com.chemtrails.booksapp.data.Book
 import com.chemtrails.booksapp.databinding.ActivityMainBinding
 import com.chemtrails.booksapp.ui.adapter.BooksAdapter
 import com.chemtrails.booksapp.ui.viewmodel.BooksViewModel
+import com.chemtrails.booksapp.ui.viewmodel.BooksViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel: BooksViewModel by viewModels()
+        val viewModel: BooksViewModel by viewModels { BooksViewModelFactory(this.applicationContext) }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this

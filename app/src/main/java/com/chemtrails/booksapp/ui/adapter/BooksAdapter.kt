@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.chemtrails.booksapp.R
-import com.chemtrails.booksapp.data.Book
+import com.chemtrails.booksapp.data.model.Book
 
 class BooksAdapter(
     private val ctx: AppCompatActivity,

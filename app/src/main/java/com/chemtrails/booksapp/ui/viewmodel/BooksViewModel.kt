@@ -2,11 +2,16 @@ package com.chemtrails.booksapp.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.chemtrails.booksapp.data.Book
+import androidx.lifecycle.viewModelScope
+import com.chemtrails.booksapp.data.db.AppDatabase
+import com.chemtrails.booksapp.data.model.Book
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class BooksViewModel : ViewModel() {
-    private val _books = mutableListOf<Book>() // We will remove this later.
-    val books: MutableLiveData<List<Book>> = MutableLiveData(emptyList())
+class BooksViewModel(db: AppDatabase) : ViewModel() {
+    private val booksDao = db.bookDao();
+    val books = booksDao.loadBooks()
+
     var title: MutableLiveData<String> = MutableLiveData("")
     var author: MutableLiveData<String> = MutableLiveData("")
     val toast: MutableLiveData<String> = MutableLiveData()
@@ -16,8 +21,10 @@ class BooksViewModel : ViewModel() {
             toast.value = "Please fill in title and author!"
             return
         }
-        _books.add(Book(title.value ?: "", author.value ?: ""))
-        books.value = _books
+        val book = Book(title = title.value ?: "", author = author.value ?: "")
+        viewModelScope.launch(Dispatchers.IO) {
+            booksDao.addBook(book)
+        }
         title.value = ""
         author.value = ""
     }

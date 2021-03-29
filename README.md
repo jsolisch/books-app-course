@@ -5,20 +5,12 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 01 Step 03: UI and logic separation through a ViewModel 
+## Module 02 Step 01: Persisting data 
 What did we improve?
-- We added a ViewModel
-- We separated UI code from logic code
-- We now respect the android life cycle 
+- We added a Database 
 
-## ModelView documentation
-[Model View](https://developer.android.com/topic/libraries/architecture/viewmodel)
-[Life Data](https://developer.android.com/topic/libraries/architecture/livedata)
-[Data Bindings](https://developer.android.com/topic/libraries/data-binding)
-
-## Import to note
-**Never use UI view in your ViewModel! Since the goal is to separate UI code and logic code!**
-**It is also highly likely that you will leak memory!!!** 
+## Room documentation
+[Room](https://developer.android.com/training/data-storage/room)
 
 ## Problems with our implementation
-- Our data dose not persist after application restarts.
+- We now have ugly singleton boilerplate code.
