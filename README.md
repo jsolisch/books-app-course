@@ -5,13 +5,15 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 01 Step 01: How to not do it!
-In this step we will implement a basic app that allows us to add a book title and author to a list. **This implementation will be just wrong!**.
+## Module 01 Step 02: Improved: How to not do it with DataBindings!
+What did we improve?
+- We added a basic structure.
+- We implemented basic data bindings.
+- We removed findById boilerplate code.
 
-## Important to know
-[Android lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle)
+## DataBindings documentation
+[Data Bindings](https://developer.android.com/topic/libraries/data-binding)
 
 ## Problems with our implementation
 - Every thing is in the MainActivity UI code and logic is mixed.
-- We have a lot of boilerplate code (findViewByID)
 - The android lifecycle is not respected. If we turn the device all data is gone.
