@@ -5,12 +5,13 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 02 Step 01: Persisting data 
+## Module 03 Step 01: Dependency injection 
 What did we improve?
-- We added a Database 
+- We removed the singleton boilerplate code by using Hilt as dependency injection.
 
-## Room documentation
-[Room](https://developer.android.com/training/data-storage/room)
+## Hilt documentation
+[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+[Hilt Jetpack](https://developer.android.com/training/dependency-injection/hilt-jetpack)
 
-## Problems with our implementation
-- We now have ugly singleton boilerplate code.
+## What to do next?
+- How to make Rest calls to a server?

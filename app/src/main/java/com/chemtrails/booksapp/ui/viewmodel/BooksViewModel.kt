@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chemtrails.booksapp.data.db.AppDatabase
 import com.chemtrails.booksapp.data.model.Book
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BooksViewModel(db: AppDatabase) : ViewModel() {
+@HiltViewModel
+class BooksViewModel @Inject constructor(private val db: AppDatabase) : ViewModel() {
     private val booksDao = db.bookDao();
     val books = booksDao.loadBooks()
 

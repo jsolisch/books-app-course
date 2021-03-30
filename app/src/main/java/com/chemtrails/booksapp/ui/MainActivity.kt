@@ -9,8 +9,9 @@ import com.chemtrails.booksapp.R
 import com.chemtrails.booksapp.databinding.ActivityMainBinding
 import com.chemtrails.booksapp.ui.adapter.BooksAdapter
 import com.chemtrails.booksapp.ui.viewmodel.BooksViewModel
-import com.chemtrails.booksapp.ui.viewmodel.BooksViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel: BooksViewModel by viewModels { BooksViewModelFactory(this.applicationContext) }
+        val viewModel: BooksViewModel by viewModels()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
