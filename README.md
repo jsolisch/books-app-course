@@ -5,13 +5,17 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 03 Step 01: Dependency injection 
+## Module 04 Step 01: Using a REST API
 What did we improve?
-- We removed the singleton boilerplate code by using Hilt as dependency injection.
+- We can now get books from a server over REST.
 
-## Hilt documentation
-[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
-[Hilt Jetpack](https://developer.android.com/training/dependency-injection/hilt-jetpack)
+## Retrofit documentation
+[Retrofit](https://square.github.io/retrofit/)
+
+## Problems with this implementation
+- Network code and DB code is cluttering the View Model
+- We always request every thing from the server
+- On every request we add the same books again
 
 ## What to do next?
-- How to make Rest calls to a server?
+- Fix our problems with a better structure and API design
