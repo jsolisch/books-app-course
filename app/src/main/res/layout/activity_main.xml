@@ -17,11 +17,12 @@
         android:orientation="vertical"
         tools:context=".ui.MainActivity">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/books"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/book_list_item" />
 
         <EditText
@@ -40,8 +41,7 @@
             android:autofillHints="@string/main_book_title"
             android:hint="@string/man_book_author"
             android:inputType="text"
-            android:text="@={viewModel.author}"
-            />
+            android:text="@={viewModel.author}" />
 
         <Button
             android:id="@+id/addButton"

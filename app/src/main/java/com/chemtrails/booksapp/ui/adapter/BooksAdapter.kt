@@ -1,19 +1,19 @@
 package com.chemtrails.booksapp.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import com.chemtrails.booksapp.R
+import androidx.recyclerview.widget.RecyclerView
 import com.chemtrails.booksapp.data.model.Book
+import com.chemtrails.booksapp.databinding.BookListItemBinding
 
 class BooksAdapter(
     private val ctx: AppCompatActivity,
     liveData: LiveData<List<Book>>
-) : BaseAdapter() {
+) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
+
+    inner class ViewHolder(val binding: BookListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     init {
         liveData.observe(ctx) {
@@ -24,23 +24,13 @@ class BooksAdapter(
 
     private var books = emptyList<Book>()
 
-    override fun getCount(): Int = books.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        BookListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    )
 
-    override fun getItem(position: Int): Any = books[position]
-
-    override fun getItemId(position: Int): Long = 0
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val book = books[position]
-        val view = convertView
-            ?: LayoutInflater.from(ctx).inflate(R.layout.book_list_item, parent, false)
-
-        val title: TextView = view.findViewById(R.id.title)
-        val author: TextView = view.findViewById(R.id.author)
-
-        title.text = book.title
-        author.text = book.author
-
-        return view
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.binding.book = books[position]
     }
+
+    override fun getItemCount() = books.size
 }
