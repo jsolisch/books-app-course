@@ -5,17 +5,18 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 04 Step 01: Using a REST API
+## Module 04 Step 02: How to use Model View ViewModel (MVVM also called Clean architecture)
 What did we improve?
-- We can now get books from a server over REST.
+- We now use MVVM
+- We improved the REST API to only send changes
+- We refactored the DB implementation to fit the new Design
 
-## Retrofit documentation
-[Retrofit](https://square.github.io/retrofit/)
+## MVVM documentation
+[App architecture guild](https://developer.android.com/jetpack/guide)
+[Model View](https://developer.android.com/topic/libraries/architecture/viewmodel)
+[Medium](https://medium.com/swlh/understanding-mvvm-architecture-in-android-aa66f7e1a70b)
 
-## Problems with this implementation
-- Network code and DB code is cluttering the View Model
-- We always request every thing from the server
-- On every request we add the same books again
+[Room migration](https://developer.android.com/training/data-storage/room/migrating-db-versions)
 
 ## What to do next?
-- Fix our problems with a better structure and API design
+- Improve the performance of our ListView.

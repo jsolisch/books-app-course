@@ -6,20 +6,23 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"sync"
 	"time"
 )
 
 // Book holds the book data.
 type Book struct {
-	Title  string `json:"title"`
-	Author string `json:"author"`
+	Title    string `json:"title"`
+	Author   string `json:"author"`
+	Modified int64  `json:"modified"`
 }
 
+var modified = time.Date(2021, time.April, 0, 0, 0, 0, 0, time.UTC).UnixNano() / 100000
 var books = []Book{
-	Book{Title: "Fahrenheit 451", Author: "Ray Bradbury"},
-	Book{Title: "The Animal Farm", Author: "George Orwell"},
-	Book{Title: "1984", Author: "George Orwell"},
+	Book{Title: "Fahrenheit 451", Author: "Ray Bradbury", Modified: modified},
+	Book{Title: "The Animal Farm", Author: "George Orwell", Modified: modified},
+	Book{Title: "1984", Author: "George Orwell", Modified: modified},
 }
 var bookMux = sync.Mutex{}
 
@@ -42,7 +45,14 @@ func booksApi(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		bookMux.Lock()
 		defer bookMux.Unlock()
-		json.NewEncoder(w).Encode(books)
+		since, _ := strconv.ParseInt(r.URL.Query().Get("since"), 10, 64)
+		delta := make([]Book, 0)
+		for _, book := range books {
+			if book.Modified > since {
+				delta = append(delta, book)
+			}
+		}
+		json.NewEncoder(w).Encode(delta)
 	case "POST":
 		bookMux.Lock()
 		defer bookMux.Unlock()
@@ -50,6 +60,7 @@ func booksApi(w http.ResponseWriter, r *http.Request) {
 		var book Book
 		if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
 			http.Error(w, "No book given", http.StatusBadRequest)
+			log.Printf("POST err: %v", err)
 		}
 		for _, saved := range books {
 			if saved.Title == book.Title && saved.Author == book.Author {

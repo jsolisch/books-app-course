@@ -1,43 +1,30 @@
 package com.chemtrails.booksapp.ui.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.chemtrails.booksapp.api.BooksApi
-import com.chemtrails.booksapp.data.db.AppDatabase
+import androidx.lifecycle.*
 import com.chemtrails.booksapp.data.model.Book
+import com.chemtrails.booksapp.data.repository.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
-    private val db: AppDatabase,
-    private val client: BooksApi
+    private val repository: BookRepository
 ) : ViewModel() {
-    private val booksDao = db.bookDao();
-    val books = booksDao.loadBooks()
-
-    init {
-        viewModelScope.launch {
-            val response = try {
-                client.getBooks()
-            } catch (e: Exception) {
-                return@launch
-            }
-            if (!response.isSuccessful) return@launch
-            response.body()?.forEach { book ->
-                booksDao.addBook(book)
-            }
-        }
-    }
-
+    val books: LiveData<List<Book>> = repository.loadBooks()
     var title: MutableLiveData<String> = MutableLiveData("")
     var author: MutableLiveData<String> = MutableLiveData("")
     val toast: MutableLiveData<String> = MutableLiveData()
+
+    init {
+        viewModelScope.launch {
+            try {
+                repository.refreshBooks()
+            } catch (e: Exception) {
+                toast.value = "Could not refresh books"
+            }
+        }
+    }
 
     fun addBook() {
         if (title.value.isNullOrBlank() || author.value.isNullOrBlank()) {
@@ -45,15 +32,11 @@ class BooksViewModel @Inject constructor(
             return
         }
         val book = Book(title = title.value ?: "", author = author.value ?: "")
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = try {
-                client.addBook(book)
+        viewModelScope.launch {
+            try {
+                repository.addBook(book)
             } catch (e: Exception) {
-                Log.e("BookModel", "Request failed", e)
-                return@launch
-            }
-            if (response.isSuccessful) {
-                booksDao.addBook(book)
+                toast.value = "Could not save book!"
             }
         }
         title.value = ""

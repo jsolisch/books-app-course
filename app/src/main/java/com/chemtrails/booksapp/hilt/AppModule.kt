@@ -24,7 +24,10 @@ class AppModule {
             ctx,
             AppDatabase::class.java,
             "books-db"
-        ).build()
+            // Normally you would migrate:
+            // https://developer.android.com/training/data-storage/room/migrating-db-versions
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     @Singleton

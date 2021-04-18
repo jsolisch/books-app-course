@@ -5,13 +5,14 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 // You may have to change this to your local address.
 const val BooksApiServerUrl = "http://192.168.178.74:9001"
 
 interface BooksApi {
     @GET("api/books")
-    suspend fun getBooks(): Response<List<Book>>
+    suspend fun getBooks(@Query("since") since: Long?): Response<List<Book>>
 
     @POST("api/books")
     suspend fun addBook(@Body book: Book): Response<Void>
