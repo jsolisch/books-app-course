@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.chemtrails.booksapp.ui.viewmodel.BooksViewModel" />
@@ -22,8 +24,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:visibility="@{viewModel.books.empty ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/book_list_item" />
+
+        <TextView
+            android:id="@+id/books_empty"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/main_no_books"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.books.empty ? View.VISIBLE : View.GONE}" />
 
         <EditText
             android:id="@+id/title"

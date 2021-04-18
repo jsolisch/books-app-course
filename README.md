@@ -5,12 +5,12 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 05 Step 01: Use the recycler view 
+## Module 05 Step 02: Show that the list is empty
 What did we improve?
-- We added the recycler view
+- We added an empty list view
 
 ## RecyclerView documentation
 [RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview)
 
 ## What to do next?
-- Show an info when the list is empty
+- How to load images?
