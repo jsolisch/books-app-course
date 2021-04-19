@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/main_book_title"
-            android:hint="@string/man_book_author"
+            android:hint="@string/main_book_author"
             android:inputType="text"
             android:text="@={viewModel.author}" />
 

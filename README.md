@@ -5,12 +5,13 @@ The Books App makes it possible to store informations about your books. The purp
 More information on Andorid Jetpack can be found in:
 [Android Jetpack](https://developer.android.com/jetpack)
 
-## Module 05 Step 02: Show that the list is empty
+## Module 05 Step 03: How to load images from the Internet
 What did we improve?
-- We added an empty list view
+- We added glide to properly load images
 
-## RecyclerView documentation
-[RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview)
+## Glide documentation
+[Git](https://github.com/bumptech/glide)
 
-## What to do next?
-- How to load images?
+## Covers open API
+[API Doc](https://openlibrary.org/dev/docs/api/covers)
+[Example Call](http://covers.openlibrary.org/b/isbn/0141036141-M.jpg)

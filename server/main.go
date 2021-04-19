@@ -15,14 +15,15 @@ import (
 type Book struct {
 	Title    string `json:"title"`
 	Author   string `json:"author"`
+	ImageURL string `json:"imageUrl"`
 	Modified int64  `json:"modified"`
 }
 
 var modified = time.Date(2021, time.April, 0, 0, 0, 0, 0, time.UTC).UnixNano() / 100000
 var books = []Book{
-	Book{Title: "Fahrenheit 451", Author: "Ray Bradbury", Modified: modified},
-	Book{Title: "The Animal Farm", Author: "George Orwell", Modified: modified},
-	Book{Title: "1984", Author: "George Orwell", Modified: modified},
+	Book{Title: "Fahrenheit 451", Author: "Ray Bradbury", ImageURL: "http://covers.openlibrary.org/b/isbn/9780006546061-M.jpg", Modified: modified},
+	Book{Title: "The Animal Farm", Author: "George Orwell", ImageURL: "http://covers.openlibrary.org/b/isbn/9780141036137-M.jpg", Modified: modified},
+	Book{Title: "1984", Author: "George Orwell", ImageURL: "http://covers.openlibrary.org/b/isbn/0141036141-M.jpg", Modified: modified},
 }
 var bookMux = sync.Mutex{}
 

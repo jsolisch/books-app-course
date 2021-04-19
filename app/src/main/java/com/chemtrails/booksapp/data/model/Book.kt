@@ -14,6 +14,9 @@ data class Book(
     @ColumnInfo(name = "author")
     val author: String,
 
+    @ColumnInfo(name = "imageUrl")
+    val imageUrl: String? = null,
+
     // We use a long in millis for the Date to keep it simple
     // Date conversion is whole topic for it self.
     @ColumnInfo(name = "modified")
