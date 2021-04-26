@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.chemtrails.booksapp.data.model.Book
 import com.chemtrails.booksapp.data.repository.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,11 +18,11 @@ class BooksViewModel @Inject constructor(
     val toast: MutableLiveData<String> = MutableLiveData()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.refreshBooks()
             } catch (e: Exception) {
-                toast.value = "Could not refresh books"
+                viewModelScope.launch { toast.value = "Could not refresh books" }
             }
         }
     }
@@ -32,11 +33,11 @@ class BooksViewModel @Inject constructor(
             return
         }
         val book = Book(title = title.value ?: "", author = author.value ?: "")
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.addBook(book)
             } catch (e: Exception) {
-                toast.value = "Could not save book!"
+                viewModelScope.launch { toast.value = "Could not save book!" }
             }
         }
         title.value = ""
