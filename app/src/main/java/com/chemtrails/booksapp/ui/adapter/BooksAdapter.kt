@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,7 +14,7 @@ import com.chemtrails.booksapp.databinding.BookListItemBinding
 import kotlin.contracts.contract
 
 class BooksAdapter(
-    private val ctx: AppCompatActivity,
+    private val ctx: LifecycleOwner,
     liveData: LiveData<List<Book>>
 ) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
 
