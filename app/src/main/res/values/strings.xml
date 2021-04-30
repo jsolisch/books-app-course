@@ -7,4 +7,7 @@
     <string name="book_list_item_author">Author</string>
     <string name="main_no_books">No Books</string>
     <string name="book_list_item_cover">Book cover</string>
+    <string name="fragment_book_add_edit_title">Add/Edit Book</string>
+    <string name="fragment_book_add_edit_add_button">Add Book</string>
+    <string name="fragment_book_add_edit_cancel_button">Cancel</string>
 </resources>

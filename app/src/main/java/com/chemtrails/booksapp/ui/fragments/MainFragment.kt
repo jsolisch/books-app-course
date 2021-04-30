@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.chemtrails.booksapp.R
 import com.chemtrails.booksapp.databinding.FragmentMainBinding
 import com.chemtrails.booksapp.ui.adapter.BooksAdapter
 import com.chemtrails.booksapp.ui.viewmodel.BooksViewModel
@@ -17,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
 
     lateinit var binding: FragmentMainBinding
+    lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +34,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        navController = findNavController()
         val viewModel: BooksViewModel by viewModels()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -40,6 +45,10 @@ class MainFragment : Fragment() {
         // Note: This is important you should never use UI views in the ViewModel!
         viewModel.toast.observe(this.viewLifecycleOwner) {
             Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.addButton.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_addEditFragment)
         }
     }
 

@@ -39,29 +39,10 @@
             android:textStyle="bold"
             android:visibility="@{viewModel.books.empty ? View.VISIBLE : View.GONE}" />
 
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/main_book_title"
-            android:hint="@string/main_book_title"
-            android:inputType="text"
-            android:text="@={viewModel.title}" />
-
-        <EditText
-            android:id="@+id/author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/main_book_title"
-            android:hint="@string/main_book_author"
-            android:inputType="text"
-            android:text="@={viewModel.author}" />
-
         <Button
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.addBook()}"
             android:text="@string/main_book_add_book" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -13,8 +13,6 @@ class BooksViewModel @Inject constructor(
     private val repository: BookRepository
 ) : ViewModel() {
     val books: LiveData<List<Book>> = repository.loadBooks()
-    var title: MutableLiveData<String> = MutableLiveData("")
-    var author: MutableLiveData<String> = MutableLiveData("")
     val toast: MutableLiveData<String> = MutableLiveData()
 
     init {
@@ -25,22 +23,5 @@ class BooksViewModel @Inject constructor(
                 viewModelScope.launch { toast.value = "Could not refresh books" }
             }
         }
-    }
-
-    fun addBook() {
-        if (title.value.isNullOrBlank() || author.value.isNullOrBlank()) {
-            toast.value = "Please fill in title and author!"
-            return
-        }
-        val book = Book(title = title.value ?: "", author = author.value ?: "")
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                repository.addBook(book)
-            } catch (e: Exception) {
-                viewModelScope.launch { toast.value = "Could not save book!" }
-            }
-        }
-        title.value = ""
-        author.value = ""
     }
 }
