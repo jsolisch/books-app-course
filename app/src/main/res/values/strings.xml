@@ -10,4 +10,5 @@
     <string name="fragment_book_add_edit_title">Add/Edit Book</string>
     <string name="fragment_book_add_edit_add_button">Add Book</string>
     <string name="fragment_book_add_edit_cancel_button">Cancel</string>
+    <string name="fragment_book_details_cover">Book cover</string>
 </resources>

@@ -3,7 +3,7 @@ package com.chemtrails.booksapp.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.AdapterView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +11,11 @@ import com.bumptech.glide.Glide
 import com.chemtrails.booksapp.R
 import com.chemtrails.booksapp.data.model.Book
 import com.chemtrails.booksapp.databinding.BookListItemBinding
-import kotlin.contracts.contract
 
 class BooksAdapter(
     private val ctx: LifecycleOwner,
-    liveData: LiveData<List<Book>>
+    liveData: LiveData<List<Book>>,
+    private val onItemClicked: (book: Book) -> Unit,
 ) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: BookListItemBinding, val ctx: Context) :
@@ -38,6 +38,9 @@ class BooksAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val book = books[position]
         holder.binding.book = book
+        holder.itemView.setOnClickListener {
+            onItemClicked(book)
+        }
         if (book.imageUrl != null) {
             Glide.with(holder.ctx)
                 .load(book.imageUrl)

@@ -1,11 +1,11 @@
 package com.chemtrails.booksapp.data.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import java.util.*
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "books", primaryKeys = ["title", "author"])
 data class Book(
     @ColumnInfo(name = "title")
@@ -21,4 +21,4 @@ data class Book(
     // Date conversion is whole topic for it self.
     @ColumnInfo(name = "modified")
     val modified: Long = System.currentTimeMillis()
-)
+) : Parcelable

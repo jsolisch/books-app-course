@@ -11,10 +11,21 @@
         <action
             android:id="@+id/action_mainFragment_to_addEditFragment"
             app:destination="@id/addEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_bookDetailsFragment"
+            app:destination="@id/bookDetailsFragment" />
     </fragment>
 
     <dialog
         android:id="@+id/addEditFragment"
         android:name="com.chemtrails.booksapp.ui.fragments.BookAddEditFragment"
         android:label="AddEditFragment" />
+    <fragment
+        android:id="@+id/bookDetailsFragment"
+        android:name="com.chemtrails.booksapp.ui.fragments.BookDetailsFragment"
+        android:label="BookDetailsFragment">
+        <argument
+            android:name="book"
+            app:argType="com.chemtrails.booksapp.data.model.Book" />
+    </fragment>
 </navigation>

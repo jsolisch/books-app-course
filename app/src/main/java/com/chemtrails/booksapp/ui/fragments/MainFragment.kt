@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.chemtrails.booksapp.R
+import com.chemtrails.booksapp.data.model.Book
 import com.chemtrails.booksapp.databinding.FragmentMainBinding
 import com.chemtrails.booksapp.ui.adapter.BooksAdapter
 import com.chemtrails.booksapp.ui.viewmodel.BooksViewModel
@@ -39,7 +40,11 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = BooksAdapter(this.viewLifecycleOwner, viewModel.books)
+        val adapter = BooksAdapter(this.viewLifecycleOwner, viewModel.books, { book ->
+            navController.navigate(
+                MainFragmentDirections.actionMainFragmentToBookDetailsFragment(book)
+            )
+        })
         binding.books.adapter = adapter
 
         // Note: This is important you should never use UI views in the ViewModel!
