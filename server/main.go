@@ -9,21 +9,42 @@ import (
 	"strconv"
 	"sync"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 // Book holds the book data.
 type Book struct {
-	Title    string `json:"title"`
-	Author   string `json:"author"`
-	ImageURL string `json:"imageUrl"`
-	Modified int64  `json:"modified"`
+	ID       uuid.UUID `json:"id"` // This is not suppose to be production ready it just supports the example. Normally you would use the IBAN as unique ID.
+	Title    string    `json:"title"`
+	Author   string    `json:"author"`
+	ISBN     string    `json:"isbn"`
+	Modified int64     `json:"modified"`
 }
 
 var modified = time.Date(2021, time.April, 0, 0, 0, 0, 0, time.UTC).UnixNano() / 100000
 var books = []Book{
-	Book{Title: "Fahrenheit 451", Author: "Ray Bradbury", ImageURL: "http://covers.openlibrary.org/b/isbn/9780006546061-M.jpg", Modified: modified},
-	Book{Title: "The Animal Farm", Author: "George Orwell", ImageURL: "http://covers.openlibrary.org/b/isbn/9780141036137-M.jpg", Modified: modified},
-	Book{Title: "1984", Author: "George Orwell", ImageURL: "http://covers.openlibrary.org/b/isbn/0141036141-M.jpg", Modified: modified},
+	Book{
+		ID:       uuid.MustParse("dab1f04d-0039-4a73-ad75-fc5969af21d0"),
+		Title:    "Fahrenheit 451",
+		Author:   "Ray Bradbury",
+		ISBN:     "9780006546061",
+		Modified: modified,
+	},
+	Book{
+		ID:       uuid.MustParse("123c7c53-7658-470d-b05e-d58e06c02e1c"),
+		Title:    "The Animal Farm",
+		Author:   "George Orwell",
+		ISBN:     "9780141036137",
+		Modified: modified,
+	},
+	Book{
+		ID:       uuid.MustParse("93b46cbf-8cc9-4c3b-8f75-951cb47a309e"),
+		Title:    "1984",
+		Author:   "George Orwell",
+		ISBN:     "0141036141",
+		Modified: modified,
+	},
 }
 var bookMux = sync.Mutex{}
 
@@ -61,15 +82,34 @@ func booksApi(w http.ResponseWriter, r *http.Request) {
 		var book Book
 		if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
 			http.Error(w, "No book given", http.StatusBadRequest)
-			log.Printf("POST err: %v", err)
+			return
 		}
 		for _, saved := range books {
-			if saved.Title == book.Title && saved.Author == book.Author {
+			if saved.ID != book.ID && saved.Title == book.Title && saved.Author == book.Author {
+				http.Error(w, "Book already exists", http.StatusConflict)
+				return
+			}
+			if saved.ID == book.ID {
 				w.WriteHeader(http.StatusCreated)
 				return
 			}
 		}
 		books = append(books, book)
+	case "DELETE":
+		bookMux.Lock()
+		defer bookMux.Unlock()
+		ID, err := uuid.Parse(r.URL.Query().Get("id"))
+		if err != nil {
+			http.Error(w, "No ID given", http.StatusBadRequest)
+			return
+		}
+		for index, saved := range books {
+			if saved.ID == ID {
+				books = append(books[:index], books[index+1:]...)
+				return
+			}
+			w.WriteHeader(http.StatusCreated)
+		}
 	default:
 		http.Error(w, fmt.Sprintf("Http method '%s' is not supported.", r.Method), http.StatusMethodNotAllowed)
 	}

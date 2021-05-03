@@ -41,4 +41,12 @@ class BookRepository @Inject constructor(
         }
         booksDao.addBook(book)
     }
+
+    suspend fun deleteBook(book: Book) = withContext(Dispatchers.IO) {
+        val response = client.deleteBook(book.id)
+        if (!response.isSuccessful){
+            throw RequestFailedException("Could not delete book.")
+        }
+        booksDao.deleteBook(book)
+    }
 }

@@ -3,7 +3,6 @@ package com.chemtrails.booksapp.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -41,9 +40,9 @@ class BooksAdapter(
         holder.itemView.setOnClickListener {
             onItemClicked(book)
         }
-        if (book.imageUrl != null) {
+        if (!book.isbn.isNullOrBlank()) {
             Glide.with(holder.ctx)
-                .load(book.imageUrl)
+                .load("http://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg")
                 .centerInside()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.binding.cover)

@@ -8,6 +8,7 @@ import com.chemtrails.booksapp.data.repository.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +22,9 @@ class BookAddEditViewModel @Inject constructor(
         data class Cancel(val message: String) : Status()
     }
 
+    var id: String? = null
+    var isbn: String? = null
+
     var title: MutableLiveData<String> = MutableLiveData("")
     var author: MutableLiveData<String> = MutableLiveData("")
     val status: MutableLiveData<Status> = MutableLiveData()
@@ -30,7 +34,12 @@ class BookAddEditViewModel @Inject constructor(
             status.value = Status.Error("Please fill in title and author!")
             return
         }
-        val book = Book(title = title.value ?: "", author = author.value ?: "")
+        val book = Book(
+            id = id ?: UUID.randomUUID().toString(),
+            title = title.value ?: "",
+            author = author.value ?: "",
+            isbn = isbn ?: ""
+        )
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.addBook(book)

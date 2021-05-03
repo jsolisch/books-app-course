@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.chemtrails.booksapp.data.model.Book
 import java.util.*
 
-@Database(entities = [Book::class], version = 3)
+@Database(entities = [Book::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookDao(): BookDao
 }

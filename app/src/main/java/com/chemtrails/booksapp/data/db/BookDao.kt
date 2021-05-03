@@ -1,10 +1,7 @@
 package com.chemtrails.booksapp.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.chemtrails.booksapp.data.model.Book
 import java.util.*
 
@@ -19,4 +16,7 @@ interface BookDao {
 
     @Query("SELECT * FROM books")
     fun loadBooks(): LiveData<List<Book>>
+
+    @Delete
+    suspend fun deleteBook(book: Book)
 }

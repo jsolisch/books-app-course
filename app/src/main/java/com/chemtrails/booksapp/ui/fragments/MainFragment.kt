@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.chemtrails.booksapp.data.model.Book
 import com.chemtrails.booksapp.databinding.FragmentMainBinding
 import com.chemtrails.booksapp.ui.adapter.BooksAdapter
 import com.chemtrails.booksapp.ui.viewmodel.BooksViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
