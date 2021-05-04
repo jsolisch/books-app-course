@@ -23,11 +23,12 @@ class BookAddEditViewModel @Inject constructor(
     }
 
     var id: String? = null
-    var isbn: String? = null
 
     var title: MutableLiveData<String> = MutableLiveData("")
     var author: MutableLiveData<String> = MutableLiveData("")
+    var isbn: MutableLiveData<String> = MutableLiveData("")
     val status: MutableLiveData<Status> = MutableLiveData()
+
 
     fun addBook() {
         if (title.value.isNullOrBlank() || author.value.isNullOrBlank()) {
@@ -38,7 +39,7 @@ class BookAddEditViewModel @Inject constructor(
             id = id ?: UUID.randomUUID().toString(),
             title = title.value ?: "",
             author = author.value ?: "",
-            isbn = isbn ?: ""
+            isbn = isbn.value ?: ""
         )
         viewModelScope.launch(Dispatchers.IO) {
             try {

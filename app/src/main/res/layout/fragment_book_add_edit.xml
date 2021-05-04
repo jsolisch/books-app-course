@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -51,6 +52,32 @@
                     android:hint="@string/main_book_author"
                     android:inputType="text"
                     android:text="@={vm.author}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autofillHints="@string/main_book_isbn"
+                        android:enabled="false"
+                        android:hint="@string/main_book_isbn"
+                        android:inputType="text"
+                        android:text="@={vm.isbn}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/scan_isbn"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/main_book_scan_isbn" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>

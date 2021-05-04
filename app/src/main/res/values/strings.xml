@@ -12,4 +12,6 @@
     <string name="fragment_book_add_edit_cancel_button">Cancel</string>
     <string name="fragment_book_details_cover">Book cover</string>
     <string name="fragment_book_details_menu_edit_book">Edit</string>
+    <string name="main_book_isbn">ISBN</string>
+    <string name="main_book_scan_isbn">Scan ISBN</string>
 </resources>
