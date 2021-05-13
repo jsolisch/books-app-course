@@ -19,7 +19,7 @@ class BookAddEditViewModel @Inject constructor(
     sealed class Status {
         data class Success(val message: String) : Status()
         data class Error(val message: String) : Status()
-        data class Cancel(val message: String) : Status()
+        object Cancel : Status()
     }
 
     var id: String? = null
@@ -57,6 +57,6 @@ class BookAddEditViewModel @Inject constructor(
     }
 
     fun cancel() {
-        status.value = Status.Cancel("")
+        status.value = Status.Cancel
     }
 }

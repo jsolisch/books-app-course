@@ -68,7 +68,7 @@ dependencies {
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     // For proper view model providers
-    implementation "androidx.activity:activity-ktx:1.2.2"
+    implementation "androidx.activity:activity-ktx:1.2.3"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -91,7 +91,22 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.2'
+    testImplementation 'androidx.test:core-ktx:1.3.0'
+    testImplementation 'org.robolectric:robolectric:4.5.1'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.mockito:mockito-inline:3.9.0'
+   // testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
+
+    testImplementation 'androidx.test.ext:truth:1.3.0'
+    testImplementation 'com.google.truth:truth:1.0'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation 'com.google.truth:truth:1.0'
 }
